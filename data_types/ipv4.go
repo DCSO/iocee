@@ -1,5 +1,6 @@
 package data_types
 
+import "fmt"
 import "regexp"
 import "strconv"
 
@@ -18,6 +19,7 @@ Validate:
 			}
 		}
 		validatedResult = append(validatedResult, s)
+		validatedResult = append(validatedResult, fmt.Sprintf("%s/32", s))
 	}
 	return validatedResult
 }
