@@ -1,3 +1,6 @@
+// DCSO IOCee IOC Extractor
+// Copyright (c) 2017, DCSO GmbH
+
 package iocee
 
 import "github.com/dcso/iocee/data_types"

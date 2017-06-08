@@ -1,14 +1,15 @@
-// DCSO Threat Intelligence Engine
-// Copyright (c) 2016, DCSO GmbH
+// DCSO IOCee IOC Extractor
+// Copyright (c) 2017, DCSO GmbH
 
 package main
 
 import (
 	"bufio"
-	"dcso.de/iocee"
 	"fmt"
-	"gopkg.in/urfave/cli.v1"
 	"os"
+
+	"github.com/DCSO/iocee"
+	"gopkg.in/urfave/cli.v1"
 )
 
 func exitWithError(message string) {
