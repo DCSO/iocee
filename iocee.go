@@ -3,7 +3,7 @@
 
 package iocee
 
-import "github.com/dcso/iocee/data_types"
+import "github.com/DCSO/iocee/data_types"
 
 //A parser takes an input string and produces a list of output strings (0 or more)
 type Parser func(string) []string
