@@ -1,3 +1,6 @@
+// DCSO IOCee IOC Extractor
+// Copyright (c) 2017, DCSO GmbH
+
 package data_types
 
 import "regexp"
@@ -9,7 +12,7 @@ func ParseHash(line string) []string {
 	result := HashRegex.FindAllString(line, 100)
 	if len(result) > 0 {
 		for _, s := range result {
-			switch len(s){
+			switch len(s) {
 			case 32:
 				result = append(result, fmt.Sprintf("md5:%s", s))
 			case 40:
