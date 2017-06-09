@@ -7,7 +7,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-
 	"github.com/DCSO/iocee"
 	"gopkg.in/urfave/cli.v1"
 )

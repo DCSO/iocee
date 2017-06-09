@@ -13,6 +13,7 @@ func ParseDomainName(line string) []string {
 	result := DomainNameRegex.FindAllString(line, 100)
 	if len(result) > 0 {
 		fullResult := make([]string, len(result), len(result))
+		copy(fullResult, result)
 		for _, s := range result {
 			parts := strings.Split(s, ".")
 			if len(parts) > 2 {

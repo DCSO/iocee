@@ -11,17 +11,18 @@ var HashRegex = regexp.MustCompile("(?i)(?:^|[^\\w])([\\w]{32}|[\\w]{40}|[\\w]{6
 func ParseHash(line string) []string {
 	result := HashRegex.FindAllString(line, 100)
 	if len(result) > 0 {
+		sanitizedResult := make([]string, 0, len(result))
 		for _, s := range result {
 			switch len(s) {
 			case 32:
-				result = append(result, fmt.Sprintf("md5:%s", s))
+				sanitizedResult = append(sanitizedResult, fmt.Sprintf("md5:%s", s))
 			case 40:
-				result = append(result, fmt.Sprintf("sha1:%s", s))
+				sanitizedResult = append(sanitizedResult, fmt.Sprintf("sha1:%s", s))
 			case 64:
-				result = append(result, fmt.Sprintf("sha256:%s", s))
+				sanitizedResult = append(sanitizedResult, fmt.Sprintf("sha256:%s", s))
 			}
 		}
-		return result
+		return sanitizedResult
 	}
 	return []string{}
 }
