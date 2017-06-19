@@ -16,7 +16,7 @@ func exitWithError(message string) {
 	os.Exit(-1)
 }
 
-func extractFromStdin(interactive bool) {
+func extractFromStdin(interactive bool, withSource bool) {
 	//we determine if the program is run interactively or within a pipe
 	stat, _ := os.Stdin.Stat()
 	var isTerminal = (stat.Mode() & os.ModeCharDevice) != 0
@@ -27,6 +27,10 @@ func extractFromStdin(interactive bool) {
 	if interactive {
 		fmt.Println("Interactive mode: Enter a blank line [by pressing ENTER] to exit (values will not be stored otherwise).")
 	}
+
+	f := bufio.NewWriter(os.Stdout)
+	defer f.Flush()
+
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -35,7 +39,12 @@ func extractFromStdin(interactive bool) {
 		}
 		results := iocee.Parse(line)
 		for _, result := range results {
-			fmt.Println(result)
+			f.WriteString(result)
+			if withSource {
+				f.WriteString("\t")
+				f.WriteString(line)
+			}
+			f.WriteString("\n")
 		}
 	}
 
@@ -43,7 +52,8 @@ func extractFromStdin(interactive bool) {
 
 func mainAction(c *cli.Context) {
 	interactive := c.GlobalBool("interactive")
-	extractFromStdin(interactive)
+	withSource := c.GlobalBool("with-source")
+	extractFromStdin(interactive, withSource)
 }
 
 func main() {
@@ -53,8 +63,12 @@ func main() {
 	app.Usage = "Utility to extract IOCs from text streams"
 	app.Flags = []cli.Flag{
 		cli.BoolFlag{
-			Name:  "interactive",
+			Name:  "interactive,i",
 			Usage: "interactively add values to the filter",
+		},
+		cli.BoolFlag{
+			Name:  "with-source,s",
+			Usage: "return the line in which a given IOC was found with the IOC",
 		},
 	}
 	app.Action = mainAction
