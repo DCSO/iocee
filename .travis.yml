@@ -2,3 +2,15 @@ language: go
 sudo: false
 before_script:
 - go vet ./...
+script: make release
+deploy:
+  provider: releases
+  api_key:
+    secure: VJ6nc8CAv6aN+PdMt2LKgwoflkbBNRrz6W8yGI3Tu2EyzNFrPvaZMZGXK35wrJ4LGR7a6h/vKRV0h9+7Z372fiJcB8mK7iopJkTlB0APxUqR9PyTSQjLEgIHljnLtHckYhNFk4vmnCQjipM4WhMmqZoNF+RrhaCRyA4pIvF6lN/WM28ms9WUphRMiuFzhgzaimRMqCCWekh8x/FniFYY+DGjyVJmO4sOGqv8GaLyLXJEoKKkNxse6i2pZddrBySHw3nkYfiSgE7d1gLe7OEnIKZo+KmKJgM61hUdYBJKos7LD4jGkjFHDbelXwrU0UiAt4uy6YOQeOXahGuYPHPDwYrtBL+SnFryymx3oebVsoP5xk9Ks9LwOms18atylwwER9r6IqDPARnllT6D6f6oIT4GoR9tWWWtRKuge2fNJJqAhNfWDPEp7cZIuvXanBBQqfJwDnhsxSNRgv+OeeoF0WPNA72K1/xY9Wh56VBiUv54lbdv/0gqvnaxPfPp7XzZnGmv9HL3lO03HMNeOs1v8KdR1TAvlMZ4vYxxEcfgQYARtjTcVohZMxjPD8a6wu6lcFphQXu48vA8kzttgUgHjGWrbEjR02R4wgbqVL6ThhdOAlt/JkR5/hWcr05/8qJk1TMa1OANEYwY4ABxWHkk+y44PBwum8DKbMH48udU3e8=
+  file:
+  - iocee_linux_amd64.bin
+  - iocee_windows_amd64.exe
+  on:
+    repo: DCSO/iocee
+    tags: true
+

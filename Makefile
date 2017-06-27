@@ -20,4 +20,9 @@ bench: install
 clean:
 	@go clean $(GOFLAGS) -i ./...
 
+release:
+	@go get $(GOFLAGS) ./...
+	@go build -v -o iocee_linux_amd64.bin iocee/*
+	GOOS=windows GOARCH=amd64 go build -v -o iocee_windows_amd64.exe iocee/*
+
 ## EOF
